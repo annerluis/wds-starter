@@ -1,0 +1,30 @@
+name: Super-Linter
+
+
+on:
+  push:
+      branches:
+      - dev
+      - qa
+      - production
+  pull_request:
+      branches:
+      - dev
+      - qa
+      - production
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps: 
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Run Super-linter
+        uses: github/super-linter@v4
+        env:
+          DEFAULT_BRANCH: dev
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VALIDATE_ALL_CODEBASE: true
+      
